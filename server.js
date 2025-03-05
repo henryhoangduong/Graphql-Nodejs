@@ -19,7 +19,7 @@ const yoga = createYoga({
 
 const app = express();
 
-app.get("/",yoga);
+app.get("/", yoga);
 
 app.listen(4000);
 console.log("Api running on: http://localhost:4000");
