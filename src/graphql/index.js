@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { createSchema } from "graphql-yoga";
 import { typeDef as User } from "./models/user.js";
-import _ from "lodash"
+import _ from "lodash";
 import { resolvers as userResolvers } from "./models/user.js";
 const queries = gql`
   type Query {
@@ -10,15 +10,21 @@ const queries = gql`
   }
 `;
 
-
 const resolvers = {
   Query: {
-    hello: () => "Hello from Yoga!", 
-  }, User: {
+    hello: () => "Hello from Yoga!",
+  },
+  User: {
     name: (obj) => {
       return obj.name.toUpperCase();
-    }
-  }
+    },
+  },
+  Mutation: {
+    createUser: (obj, args) => {
+      console.log(args);
+      console.log("Creating a user");
+    },
+  },
 };
 
 export const schema = createSchema({
