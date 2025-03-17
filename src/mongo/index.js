@@ -1,8 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 const uri = process.env.DATABASE_URL;
-console.log(uri)
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -11,13 +10,14 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function run(params) {
+export async function setupDatabase(params) {
   try {
     await client.connect();
-    await client.db("amin").command({ ping: 1 });
+    await client.db("admin").command({ ping: 1 });
     console.log("Ping your db successfully");
+    return {client};
   } catch (error) {
-    await client.close();
+    console.log(error);
+    return {}
   }
-}
-run().catch(console.dir)
+} 

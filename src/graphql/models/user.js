@@ -14,7 +14,8 @@ export const typeDef = gql`
 
 export const resolvers = {
   Query: {
-    user: (_, { name, age }) => {
+    user: (_, { name }, context) => {
+      console.log(context.client)
       return {
         id: 1,
         name: "henry",
