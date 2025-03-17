@@ -7,11 +7,11 @@ import { setupDatabase } from "./src/mongo/index.js";
 const yoga = createYoga({
   schema,
   context: async () => {
-    const {client} = await setupDatabase()
+    const mongo = await setupDatabase();
     return {
-   client
-   }
-  }
+      mongo,
+    };
+  },
 });
 
 const app = express();

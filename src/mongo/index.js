@@ -15,9 +15,16 @@ export async function setupDatabase(params) {
     await client.connect();
     await client.db("admin").command({ ping: 1 });
     console.log("Ping your db successfully");
-    return {client};
+    return {
+      client,
+      db: client.db("sample_mflix"),
+      collections: {
+        users: db.collection("users"),
+        movies: db.collection("movies"),
+      },
+    };
   } catch (error) {
     console.log(error);
-    return {}
+    return {};
   }
-} 
+}

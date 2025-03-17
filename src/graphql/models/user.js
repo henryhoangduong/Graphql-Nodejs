@@ -1,21 +1,24 @@
 import gql from "graphql-tag";
 export const typeDef = gql`
   type Query {
-    usr: User
+    user:User 
+    users: [User!]! 
   }
   type Mutation {
     createUser(name: String!, age: Int): User
   }
   type User {
-    id: Int
+    id: I D!
     name: String
+    age: Int
   }
 `;
 
 export const resolvers = {
   Query: {
-    user: (_, { name }, context) => {
-      console.log(context.client)
+    user: async (_, { name }, context) => {
+      console.log(context.client);
+      const movies = await context.mongo.movies.find().toArray();
       return {
         id: 1,
         name: "henry",
